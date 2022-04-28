@@ -1,4 +1,4 @@
-FROM node:16-alpine
+FROM node:12.22.12
 RUN mkdir /app-tiktok
 COPY package.json /app-tiktok
 WORKDIR /app-tiktok
