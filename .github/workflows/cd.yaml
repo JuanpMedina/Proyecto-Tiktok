@@ -14,4 +14,4 @@ jobs:
     - name: Code checkout
       uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag tiktok:$(git rev-parse --short HEAD)
+      run: docker build . --file Dockerfile --tag prueba:$(git rev-parse --short HEAD)
