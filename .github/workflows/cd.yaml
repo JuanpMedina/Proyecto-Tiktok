@@ -15,3 +15,22 @@ jobs:
       uses: actions/checkout@v2
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag prueba:$(git rev-parse --short HEAD)
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v2
+      with: 
+        username: ${{ secrets.TOKEN_GC_USERNAME_DOCKER }}
+        password: ${{ secrets.TOKEN_GC_PASSWORD_DOCKER }}
+    - name: Extract metadata (tags, labels) for Docker
+      id: meta
+      uses: docker/metadata-action@v4
+      with:
+        images: juanpmedina/prueba
+      
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        push: true
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
+ 
